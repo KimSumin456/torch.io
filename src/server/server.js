@@ -2,6 +2,7 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const socketio = require('socket.io');
+const morgan = require('morgan');
 
 const Constants = require('../shared/constants');
 const Game = require('./game');
@@ -15,9 +16,11 @@ if (process.env.NODE_ENV === 'development') {
   // Setup Webpack for development
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler));
+  app.use(morgan('dev'));
 } else {
   // Static serve the dist/ folder in production
   app.use(express.static('dist'));
+  app.use(morgan('combined'));
 }
 
 // Listen on port
