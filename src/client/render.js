@@ -11,6 +11,7 @@ const { PLAYER_RADIUS, PLAYER_MAX_HP, BULLET_RADIUS, MAP_SIZE } = Constants;
 // Get the canvas graphics context
 const canvas = document.getElementById('game-canvas');
 const context = canvas.getContext('2d');
+const context2 = canvas.getContext('2d');
 setCanvasDimensions();
 
 function setCanvasDimensions() {
@@ -26,7 +27,7 @@ window.addEventListener('resize', debounce(40, setCanvasDimensions));
 let animationFrameRequestId;
 
 function render() {
-  const { me, others, bullets } = getCurrentState();
+  const { me, others, bullets, paths } = getCurrentState();
   if (me) {
     // Draw background
     renderBackground(me.x, me.y);
@@ -38,6 +39,9 @@ function render() {
 
     // Draw all bullets
     bullets.forEach(renderBullet.bind(null, me));
+
+    // Draw all paths
+    paths.forEach(renderPath.bind(null, me));
 
     // Draw all players
     renderPlayer(me, me);
@@ -57,12 +61,21 @@ function renderBackground(x, y) {
     MAP_SIZE / 10,
     backgroundX,
     backgroundY,
-    MAP_SIZE / 2,
+    MAP_SIZE / 1.1,
   );
-  backgroundGradient.addColorStop(0, 'black');
-  backgroundGradient.addColorStop(1, 'gray');
+  backgroundGradient.addColorStop(0, 'skyblue');
+  backgroundGradient.addColorStop(0.95, "purple");
+  backgroundGradient.addColorStop(1, 'black');
   context.fillStyle = backgroundGradient;
   context.fillRect(0, 0, canvas.width, canvas.height);
+
+  context.drawImage(
+    getAsset('yard2.svg'),
+    canvas.width / 2 - x,
+    canvas.height / 2 - y,
+    MAP_SIZE,
+    MAP_SIZE,
+  );
 }
 
 // Renders a ship at the given coordinates
@@ -76,7 +89,7 @@ function renderPlayer(me, player) {
   context.translate(canvasX, canvasY);
   context.rotate(direction);
   context.drawImage(
-    getAsset('ship.svg'),
+    getAsset('chtor.svg'),
     -PLAYER_RADIUS,
     -PLAYER_RADIUS,
     PLAYER_RADIUS * 2,
@@ -85,7 +98,7 @@ function renderPlayer(me, player) {
   context.restore();
 
   // Draw health bar
-  context.fillStyle = 'white';
+  context.fillStyle = 'green';
   context.fillRect(
     canvasX - PLAYER_RADIUS,
     canvasY + PLAYER_RADIUS + 8,
@@ -99,17 +112,40 @@ function renderPlayer(me, player) {
     PLAYER_RADIUS * 2 * (1 - player.hp / PLAYER_MAX_HP),
     2,
   );
+
+  // Draw nickname
+  context.fillStyle = "white";
+  context.font = "14px Arial";
+  let username = player.username.split('NaN')[0];
+  if (username.length > 6) {
+    username = username.substring(0, 6).concat('...');
+  }
+  context.fillText(username, canvasX - PLAYER_RADIUS - username.length, canvasY + PLAYER_RADIUS + 24);
 }
 
 function renderBullet(me, bullet) {
   const { x, y } = bullet;
   context.drawImage(
-    getAsset('bullet.svg'),
+    getAsset('fire.svg'),
     canvas.width / 2 + x - me.x - BULLET_RADIUS,
     canvas.height / 2 + y - me.y - BULLET_RADIUS,
     BULLET_RADIUS * 2,
     BULLET_RADIUS * 2,
   );
+}
+
+function renderPath(me, path) {
+  const { x, y } = path;
+  context2.fillStyle = path.parentColor;
+  context2.fillRect(
+    canvas.width / 2 + x - me.x,
+    canvas.height / 2 + y - me.y,
+    30 * 2,
+    30 * 2,
+  )
+  // context.beginPath();
+  // context.arc(canvas.width / 2 + x - me.x, canvas.height / 2 + y - me.y, 25, 0, 2 * Math.PI);
+  // context.fill();
 }
 
 function renderMainMenu() {
