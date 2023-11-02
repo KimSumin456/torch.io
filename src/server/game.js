@@ -47,7 +47,7 @@ class Game {
       if (bullet.update(dt)) {
         // Destroy this bullet
         bulletsToRemove.push(bullet);
-        this.paths.push(new Path(bullet.parentID, bullet.x, bullet.y, this.players[bullet.parentID]?.color || new colorHash(bullet.parentID)));
+        this.paths.push(new Path(bullet.parentID, bullet.x, bullet.y, this.players[bullet.parentID]?.color || new colorHash().hex(bullet.parentID)));
         if (this.paths.length >= 10000) {
           for (let i = 0; i < 100; ++i) {
             this.paths.shift();
