@@ -50,10 +50,8 @@ class Game {
         if (this.players[bullet.parentID]) {
           this.paths.push(new Path(bullet.parentID, bullet.x, bullet.y, this.players[bullet.parentID].color));
         }
-        if (this.paths.length >= 10000) {
-          for (let i = 0; i < 100; ++i) {
-            this.paths.shift();
-          }
+        if (this.paths.length >= 1000) {
+          this.paths.splice(0, 100);
         }
       }
     });
