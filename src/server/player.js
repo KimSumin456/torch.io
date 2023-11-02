@@ -10,7 +10,7 @@ class Player extends ObjectClass {
     this.hp = Constants.PLAYER_MAX_HP;
     this.fireCooldown = 0;
     this.score = 0;
-    this.color = new colorHash().hex(this.id);
+    this.color = new colorHash({ lightness: 0.5, saturation: 0.2 }).hex(this.id);
   }
 
   // Returns a newly created bullet, or null.

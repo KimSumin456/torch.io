@@ -1,6 +1,5 @@
 const ASSET_NAMES = [
-  'yard.svg',
-  'yard2.svg',
+  'yard3.svg',
   'chtor.svg',
   'fire.svg'
 ];

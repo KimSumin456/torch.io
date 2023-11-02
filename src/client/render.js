@@ -37,11 +37,11 @@ function render() {
     context.lineWidth = 1;
     context.strokeRect(canvas.width / 2 - me.x, canvas.height / 2 - me.y, MAP_SIZE, MAP_SIZE);
 
-    // Draw all bullets
-    bullets.forEach(renderBullet.bind(null, me));
-
     // Draw all paths
     paths.forEach(renderPath.bind(null, me));
+
+    // Draw all bullets
+    bullets.forEach(renderBullet.bind(null, me));
 
     // Draw all players
     renderPlayer(me, me);
@@ -63,14 +63,15 @@ function renderBackground(x, y) {
     backgroundY,
     MAP_SIZE / 1.1,
   );
-  backgroundGradient.addColorStop(0, 'skyblue');
-  backgroundGradient.addColorStop(0.95, "purple");
+  backgroundGradient.addColorStop(0, 'white');
+  backgroundGradient.addColorStop(0.5, "skyblue");
+  backgroundGradient.addColorStop(0.9, "purple");
   backgroundGradient.addColorStop(1, 'black');
   context.fillStyle = backgroundGradient;
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   context.drawImage(
-    getAsset('yard2.svg'),
+    getAsset('yard3.svg'),
     canvas.width / 2 - x,
     canvas.height / 2 - y,
     MAP_SIZE,
@@ -115,12 +116,10 @@ function renderPlayer(me, player) {
 
   // Draw nickname
   context.fillStyle = "white";
-  context.font = "14px Arial";
+  context.font = "20px Arial";
   let username = player.username.split('NaN')[0];
-  if (username.length > 6) {
-    username = username.substring(0, 6).concat('...');
-  }
-  context.fillText(username, canvasX - PLAYER_RADIUS - username.length, canvasY + PLAYER_RADIUS + 24);
+  username = username.substring(0, 8).concat('...');
+  context.fillText(username, canvasX - PLAYER_RADIUS - username.length, canvasY + PLAYER_RADIUS + 30);
 }
 
 function renderBullet(me, bullet) {
@@ -140,8 +139,8 @@ function renderPath(me, path) {
   context2.fillRect(
     canvas.width / 2 + x - me.x,
     canvas.height / 2 + y - me.y,
-    30 * 2,
-    30 * 2,
+    Constants.PATH_RADIUS * 2,
+    Constants.PATH_RADIUS * 2,
   )
   // context.beginPath();
   // context.arc(canvas.width / 2 + x - me.x, canvas.height / 2 + y - me.y, 25, 0, 2 * Math.PI);
