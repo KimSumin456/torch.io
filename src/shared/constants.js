@@ -10,6 +10,7 @@ module.exports = Object.freeze({
   BULLET_RANGE: 450,
 
   PATH_RADIUS: 80,
+  PATH_AUTOTUNE: 16,
 
   SCORE_BULLET_HIT: 20,
   SCORE_PER_SECOND: 1,

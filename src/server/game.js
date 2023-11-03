@@ -48,7 +48,7 @@ class Game {
         // Destroy this bullet
         bulletsToRemove.push(bullet);
         if (this.players[bullet.parentID]) {
-          this.paths.push(new Path(bullet.parentID, bullet.x, bullet.y, this.players[bullet.parentID].color));
+          this.paths.push(new Path(bullet.parentID, bullet.x - (bullet.x % 100 / Constants.PATH_AUTOTUNE) * Constants.PATH_AUTOTUNE, bullet.y - (bullet.y % 100 / Constants.PATH_AUTOTUNE) * Constants.PATH_AUTOTUNE, this.players[bullet.parentID].color));
         }
         if (this.paths.length >= 1000) {
           this.paths.splice(0, 100);
@@ -116,13 +116,16 @@ class Game {
     const nearbyPaths = this.paths.filter(
       p => p.distanceTo(player) <= Constants.MAP_SIZE / 2,
     );
+    const uniquePaths = nearbyPaths.filter(
+      (item, index) => nearbyPaths.indexOf(item) == index
+    );
 
     return {
       t: Date.now(),
       me: player.serializeForUpdate(),
       others: nearbyPlayers.map(p => p.serializeForUpdate()),
       bullets: nearbyBullets.map(b => b.serializeForUpdate()),
-      paths: nearbyPaths.map(p => p.serializeForUpdate()),
+      paths: uniquePaths.map(p => p.serializeForUpdate()),
       leaderboard,
     };
   }
