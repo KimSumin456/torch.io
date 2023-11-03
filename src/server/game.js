@@ -51,8 +51,8 @@ class Game {
         if (this.players[bullet.parentID]) {
           this.paths.push(new Path(bullet.parentID, bullet.x - (bullet.x % 100 / Constants.PATH_AUTOTUNE) * Constants.PATH_AUTOTUNE, bullet.y - (bullet.y % 100 / Constants.PATH_AUTOTUNE) * Constants.PATH_AUTOTUNE, this.players[bullet.parentID].color));
         }
-        if (this.paths.length >= 1000) {
-          this.paths.splice(0, 100);
+        if (this.paths.length >= 800) {
+          this.paths.splice(0, 200);
         }
       }
     });
