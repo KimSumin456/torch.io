@@ -15,6 +15,8 @@
   "dependencies": {
     "color-hash": "^2.0.2",
     "express": "^4.17.3",
+    "helmet": "^7.0.0",
+    "hpp": "^0.2.3",
     "html-webpack-plugin": "^3.2.0",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",

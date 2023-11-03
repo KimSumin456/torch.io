@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const socketio = require('socket.io');
 const morgan = require('morgan');
+const helmet = require('helmet');
+const hpp = require('hpp');
 
 const Constants = require('../shared/constants');
 const Game = require('./game');
@@ -21,6 +23,14 @@ if (process.env.NODE_ENV === 'development') {
   // Static serve the dist/ folder in production
   app.use(express.static('dist'));
   app.use(morgan('combined'));
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginEmbeddederPolicy: false,
+      crossOriginResourcePolicy: false,
+    })
+  )
+  app.use(hpp());
 }
 
 // Listen on port
