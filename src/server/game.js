@@ -25,6 +25,7 @@ class Game {
   }
 
   removePlayer(socket) {
+    console.log('Player disconnected!', socket.id);
     delete this.sockets[socket.id];
     delete this.players[socket.id];
   }

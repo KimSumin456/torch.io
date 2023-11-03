@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>An example .io game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/assets/icon64.png">
-  <meta property="description" content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
+  <meta property="description"
+    content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
   <meta property="og:title" content="An example .io game">
-  <meta property="og:description" content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
+  <meta property="og:description"
+    content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
   <meta property="og:image" content="/assets/icon1200.png">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58664433-3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'UA-58664433-3');
   </script>
 </head>
+
 <body>
   <canvas id="game-canvas"></canvas>
   <div id="play-menu" class="hidden">
-    <h1>An example .io game</h1>
+    <h1>토치토치</h1>
     <p>
-      Stay alive and shoot other players.
+      <b>다른 플레이어를 쏘고 계속 살아남으세요.</b>
       <br />
-      Use your mouse to move.
+      (색깔 네모는 그냥 잔상입니다만?)
+      <br />
+      <b>마우스를 사용하여 이동합니다.</b>
     </p>
     <hr />
     <p>
       <!-- <br /> -->
-      Read the tutorial: <a href="https://victorzhou.com/blog/build-an-io-game-part-1/" target="_blank">How to Build an .io Game</a>.
-      <br />
-      See the source code on <a href="https://github.com/vzhou842/example-.io-game" target="_blank">Github</a>.
-      <br />
-      Created by <a href="https://victorzhou.com">Victor Zhou</a>.
+      Refer to <a href="https://victorzhou.com">Victor Zhou</a>.
     </p>
     <hr />
-    <input type="text" id="username-input" placeholder="Username" />
-    <button id="play-button">PLAY</button>
+    <input type="text" id="username-input" placeholder="이름" />
+    <button id="play-button">시작</button>
   </div>
   <div id="leaderboard" class="hidden">
     <table>
@@ -45,11 +47,26 @@
         <th>Username</th>
         <th>Score</th>
       </tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
     </table>
   </div>
   <div id="disconnect-modal" class="hidden">
@@ -60,4 +77,5 @@
     </div>
   </div>
 </body>
+
 </html>
